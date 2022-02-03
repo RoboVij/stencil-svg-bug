@@ -1,0 +1,101 @@
+diff --git a/node_modules/leaflet.fullscreen/Control.FullScreen.js b/node_modules/leaflet.fullscreen/Control.FullScreen.js
+index 9525621..147d7fc 100644
+--- a/node_modules/leaflet.fullscreen/Control.FullScreen.js
++++ b/node_modules/leaflet.fullscreen/Control.FullScreen.js
+@@ -236,49 +236,53 @@
+ 			return container;
+ 		},
+ 
+-		onRemove: function () {
+-			leaflet.DomEvent
+-				.off(this.link, 'click', leaflet.DomEvent.stopPropagation)
+-				.off(this.link, 'click', leaflet.DomEvent.preventDefault)
+-				.off(this.link, 'click', this.toggleFullScreen, this);
+-
+-			leaflet.DomEvent
+-				.off(this._container, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.stopPropagation)
+-				.off(this._container, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.preventDefault)
+-				.off(this._container, this._screenfull.raw.fullscreenchange, this._handleFullscreenChange, this);
+-
+-			leaflet.DomEvent
+-				.off(document, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.stopPropagation)
+-				.off(document, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.preventDefault)
+-				.off(document, this._screenfull.raw.fullscreenchange, this._handleFullscreenChange, this);
+-		},
+-
+-		_createButton: function (title, className, content, container, fn, context) {
+-			this.link = leaflet.DomUtil.create('a', className, container);
+-			this.link.href = '#';
+-			this.link.title = title;
+-			this.link.innerHTML = content;
+-
+-			this.link.setAttribute('role', 'button');
+-			this.link.setAttribute('aria-label', title);
+-
+-			leaflet.DomEvent
+-				.on(this.link, 'click', leaflet.DomEvent.stopPropagation)
+-				.on(this.link, 'click', leaflet.DomEvent.preventDefault)
+-				.on(this.link, 'click', fn, context);
+-
+-			leaflet.DomEvent
+-				.on(container, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.stopPropagation)
+-				.on(container, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.preventDefault)
+-				.on(container, this._screenfull.raw.fullscreenchange, this._handleFullscreenChange, context);
+-
+-			leaflet.DomEvent
+-				.on(document, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.stopPropagation)
+-				.on(document, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.preventDefault)
+-				.on(document, this._screenfull.raw.fullscreenchange, this._handleFullscreenChange, context);
+-
+-			return this.link;
+-		},
++    onRemove: function () {
++      leaflet.DomEvent
++        .off(this.link, 'click', leaflet.DomEvent.stopPropagation)
++        .off(this.link, 'click', leaflet.DomEvent.preventDefault)
++        .off(this.link, 'click', this.toggleFullScreen, this);
++
++      if (this._screenfull.raw) {
++        leaflet.DomEvent
++          .off(this._container, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.stopPropagation)
++          .off(this._container, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.preventDefault)
++          .off(this._container, this._screenfull.raw.fullscreenchange, this._handleFullscreenChange, this);
++
++        leaflet.DomEvent
++          .off(document, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.stopPropagation)
++          .off(document, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.preventDefault)
++          .off(document, this._screenfull.raw.fullscreenchange, this._handleFullscreenChange, this);
++      }
++    },
++
++    _createButton: function (title, className, content, container, fn, context) {
++      this.link = leaflet.DomUtil.create('a', className, container);
++      this.link.href = '#';
++      this.link.title = title;
++      this.link.innerHTML = content;
++
++      this.link.setAttribute('role', 'button');
++      this.link.setAttribute('aria-label', title);
++
++      leaflet.DomEvent
++        .on(this.link, 'click', leaflet.DomEvent.stopPropagation)
++        .on(this.link, 'click', leaflet.DomEvent.preventDefault)
++        .on(this.link, 'click', fn, context);
++
++      if (this._screenfull.raw) {
++        leaflet.DomEvent
++          .on(container, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.stopPropagation)
++          .on(container, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.preventDefault)
++          .on(container, this._screenfull.raw.fullscreenchange, this._handleFullscreenChange, context);
++
++        leaflet.DomEvent
++          .on(document, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.stopPropagation)
++          .on(document, this._screenfull.raw.fullscreenchange, leaflet.DomEvent.preventDefault)
++          .on(document, this._screenfull.raw.fullscreenchange, this._handleFullscreenChange, context);
++      }
++
++      return this.link;
++    },
+ 
+ 		toggleFullScreen: function () {
+ 			var map = this._map;

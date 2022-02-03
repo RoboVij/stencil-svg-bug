@@ -1,3 +1,6 @@
+@import url(~leaflet/dist/leaflet.css);
+@import '~leaflet.fullscreen/Control.FullScreen.css';
+
 .app-home {
   padding: 10px;
 }
@@ -22,4 +25,13 @@ button {
 button:hover {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
   transform: translateY(1px);
+}
+
+.app-home .map-wrapper {
+  /*display: block;*/
+  /*position: relative;*/
+  height: 800px;
+  width: 95%;
+  z-index: 1;
+  margin-left: 60px;
 }

@@ -8,7 +8,8 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "postinstall": "npx patch-package"
   },
   "devDependencies": {
     "@stencil/core": "^2.13.0",
@@ -18,5 +19,13 @@
     "jest-cli": "^27.4.5",
     "puppeteer": "^10.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/leaflet": "^1.7.9",
+    "@types/leaflet.fullscreen": "^1.6.1",
+    "leaflet": "^1.7.1",
+    "leaflet.fullscreen": "^2.2.0",
+    "patch-package": "^6.4.7",
+    "screenfull": "^6.0.1"
+  }
 }
